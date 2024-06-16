@@ -1,10 +1,9 @@
-#include "testProgram.h"
+#include "main.h"
 
 int main(void)
 {
 
-    printf("Program\n");
-    printf("start\n");
+    printf("Hello\n");
 
     Test_state myStatus;
     testState_init(&myStatus);
@@ -14,7 +13,7 @@ int main(void)
         testState_task(&myStatus);
     }
 
-    printf("end\n");
+    printf("Goodbye\n");
 
     return 0;
 }

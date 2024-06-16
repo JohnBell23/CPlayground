@@ -1,9 +1,14 @@
 #include "testState.h"
 
+void changeState(Test_state *state, TestStates newState);
+void taskA(Test_state *state);
+void taskB(Test_state *state);
+void taskC(Test_state *state);
+
 void testState_init(Test_state *state)
 {
     state->state = A;
-    state->task_func_ptr = &testState_taskA;
+    state->task_func_ptr = &taskA;
 }
 
 void testState_task(Test_state *state)
@@ -29,23 +34,40 @@ void testState_print(Test_state *state)
     }
 }
 
-void testState_taskA(Test_state *state)
+void taskA(Test_state *state)
 {
     printf("Task A\n");
-    state->state = B;
-    state->task_func_ptr = &testState_taskB;
+    
+    changeState(state, B);
 }
 
-void testState_taskB(Test_state *state)
+void taskB(Test_state *state)
 {
     printf("Task B\n");
-    state->state = C;
-    state->task_func_ptr = &testState_taskC;
+    
+    changeState(state, C);
 }
 
-void testState_taskC(Test_state *state)
+void taskC(Test_state *state)
 {
     printf("Task C\n");
-    state->state = A;
-    state->task_func_ptr = &testState_taskA;
+
+    changeState(state, A);
+}
+
+void changeState(Test_state *state, TestStates newState)
+{
+    state->state = newState;
+    switch (newState)
+    {
+    case A:
+        state->task_func_ptr = &taskA;
+        break;
+    case B:
+        state->task_func_ptr = &taskB;
+        break;
+    case C:
+        state->task_func_ptr = &taskC;
+        break;
+    }
 }
