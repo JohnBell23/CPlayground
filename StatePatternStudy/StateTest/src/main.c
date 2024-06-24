@@ -5,7 +5,7 @@ int main(void)
 
     printf("Hello\n");
 
-    Test_state myStatus;
+    TestState myStatus;
     testState_init(&myStatus);
 
     for (int i = 0; i < 10; i++)

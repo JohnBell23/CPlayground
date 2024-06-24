@@ -10,14 +10,16 @@ typedef enum TestStatesEnum
     C
 } TestStates;
 
-typedef struct Test_state_type
+typedef struct TestStateType
 {
     TestStates state;
-    void (*task_func_ptr)(struct Test_state_type *);
-} Test_state;
+    void (*testState_taskFuncPtr)(struct TestStateType *);
+    void (*testState_onEntryFuncPtr)(struct TestStateType *);
+    void (*testState_onExitFuncPtr)(struct TestStateType *);
+} TestState;
 
-void testState_init(Test_state *state);
-void testState_task(Test_state *state);
-void testState_print(Test_state *state);
+void testState_init(TestState *state);
+void testState_task(TestState *state);
+void testState_print(TestState *state);
 
 #endif

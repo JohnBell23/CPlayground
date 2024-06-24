@@ -1,24 +1,34 @@
 #include "testState.h"
 
-void changeState(Test_state *state, TestStates newState);
-void taskA(Test_state *state);
-void taskB(Test_state *state);
-void taskC(Test_state *state);
+void changeState(TestState *state, TestStates newState);
+void taskA(TestState *state);
+void taskB(TestState *state);
+void taskC(TestState *state);
 
-void testState_init(Test_state *state)
+void taskA_onEntry(TestState *state);
+void taskB_onEntry(TestState *state);
+void taskC_onEntry(TestState *state);
+
+void taskA_onExit(TestState *state);
+void taskB_onExit(TestState *state);
+void taskC_onExit(TestState *state);
+
+void testState_init(TestState *state)
 {
     state->state = A;
-    state->task_func_ptr = &taskA;
+    state->testState_taskFuncPtr = taskA;
+    state->testState_onEntryFuncPtr = taskA_onEntry;
+    state->testState_onExitFuncPtr = taskA_onExit;
 }
 
-void testState_task(Test_state *state)
+void testState_task(TestState *state)
 {
     testState_print(state);
 
-    state->task_func_ptr(state);
+    state->testState_taskFuncPtr(state);
 }
 
-void testState_print(Test_state *state)
+void testState_print(TestState *state)
 {
     switch (state->state)
     {
@@ -34,40 +44,80 @@ void testState_print(Test_state *state)
     }
 }
 
-void taskA(Test_state *state)
+void taskA(TestState *state)
 {
     printf("Task A\n");
-    
+
     changeState(state, B);
 }
 
-void taskB(Test_state *state)
+void taskB(TestState *state)
 {
     printf("Task B\n");
-    
+
     changeState(state, C);
 }
 
-void taskC(Test_state *state)
+void taskC(TestState *state)
 {
     printf("Task C\n");
 
     changeState(state, A);
 }
 
-void changeState(Test_state *state, TestStates newState)
+void taskA_onEntry(TestState *state)
 {
+    printf("taskA_onEntry\n");
+}
+
+void taskB_onEntry(TestState *state)
+{
+    printf("taskB_onEntry\n");
+}
+
+void taskC_onEntry(TestState *state)
+{
+    printf("taskC_onEntry\n");
+}
+
+void taskA_onExit(TestState *state)
+{
+    printf("taskA_onExit\n");
+}
+
+void taskB_onExit(TestState *state)
+{
+    printf("taskB_onExit\n");
+}
+
+void taskC_onExit(TestState *state)
+{
+    printf("taskC_onExit\n");
+}
+
+void changeState(TestState *state, TestStates newState)
+{
+    state->testState_onExitFuncPtr(state);
+
     state->state = newState;
     switch (newState)
     {
     case A:
-        state->task_func_ptr = &taskA;
+        state->testState_taskFuncPtr = &taskA;
+        state->testState_onEntryFuncPtr = taskA_onEntry;
+        state->testState_onExitFuncPtr = taskA_onExit;
         break;
     case B:
-        state->task_func_ptr = &taskB;
+        state->testState_taskFuncPtr = &taskB;
+        state->testState_onEntryFuncPtr = taskB_onEntry;
+        state->testState_onExitFuncPtr = taskB_onExit;
         break;
     case C:
-        state->task_func_ptr = &taskC;
+        state->testState_taskFuncPtr = &taskC;
+        state->testState_onEntryFuncPtr = taskC_onEntry;
+        state->testState_onExitFuncPtr = taskC_onExit;
         break;
     }
+
+    state->testState_onEntryFuncPtr(state);
 }
