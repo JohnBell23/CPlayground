@@ -1,0 +1,17 @@
+{
+   
+    "C_Cpp.clang_format_fallbackStyle": "LLVM",  // Fallback-Stil, falls keine .clang-format Datei vorhanden ist
+    "C_Cpp.clang_format_style": "file", 
+    "editor.defaultFormatter": "ms-vscode.cpptools",
+    "editor.formatOnSave": true,
+    "[cpp]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools",
+        "editor.insertSpaces": true
+    },
+    "files.associations": {
+        "mylinkedlist.h": "c"
+    }
+}
