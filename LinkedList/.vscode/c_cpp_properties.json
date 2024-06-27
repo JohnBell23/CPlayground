@@ -2,7 +2,11 @@
   "configurations": [
     {
       "name": "Win32",
-      "includePath": ["${workspaceFolder}/**", "${workspaceFolder}/inc"],
+      "includePath": [
+        "${workspaceFolder}/**", 
+        "${workspaceFolder}/inc",
+         "${workspaceFolder}/src"
+      ],
       "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
       "windowsSdkVersion": "10.0.22621.0",
       "compilerPath": "cl.exe",

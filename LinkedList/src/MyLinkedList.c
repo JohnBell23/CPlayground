@@ -16,7 +16,7 @@ Node *MyLinkedList_add(Node *nodes, Value value)
     {
         lastNode = lastNode->next;
     }
-    
+
     lastNode->next = newNode;
     return newNode;
 }
