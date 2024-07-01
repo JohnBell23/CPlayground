@@ -1,18 +1,16 @@
-/*
- * my_linked_list.c
- *
- */
 #include "my_linked_list.h"
+#include <string.h>
 
-Node* my_linked_list_init(Value value) {
+Node* my_linked_list_init(void *value, size_t size) {
 	Node *newNode = (Node*) malloc(sizeof(Node));
 	newNode->next = NULL;
-	newNode->value = value;
+	newNode->value = malloc(size);
+	memcpy(newNode->value, value, size);
 	return newNode;
 }
 
-Node* my_linked_list_add(Node *nodes, Value value) {
-	Node *newNode = my_linked_list_init(value);
+Node* my_linked_list_add(Node *nodes, void *value, size_t size) {
+	Node *newNode = my_linked_list_init(value, size);
 	Node *lastNode = nodes;
 	while (lastNode->next != NULL) {
 		lastNode = lastNode->next;
@@ -22,11 +20,20 @@ Node* my_linked_list_add(Node *nodes, Value value) {
 	return newNode;
 }
 
-void my_linked_list_printValues(Node *nodes) {
+void my_linked_list_print_int_values(Node *nodes) {
 	int i = 1;
 	Node *current = nodes;
 	while (current != NULL) {
-		printf("Node %d value %d\n", i++, current->value.value);
+		printf("Node %4d value %6d\n", i++, *((int*) current->value));
+		current = current->next;
+	}
+}
+
+void my_linked_list_print_values(Node *nodes) {
+	int i = 1;
+	Node *current = nodes;
+	while (current != NULL) {
+		printf("Node %4d value %6d\n", i++, *((int*) current->value));
 		current = current->next;
 	}
 }
@@ -36,7 +43,7 @@ void my_linked_list_destroy(Node *nodes) {
 	while (current != NULL) {
 		Node *temp = current;
 		current = current->next;
+		free(temp->value);
 		free(temp);
 	}
 }
-

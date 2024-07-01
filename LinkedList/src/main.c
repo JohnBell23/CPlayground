@@ -3,16 +3,15 @@
 int main(void) {
 	printf("Hello\n");
 
-	Value v;
-	v.value = 1;
-	Node *startNode = my_linked_list_init(v);
+	int value = 1000;
+	Node *startNode = my_linked_list_init(&value, sizeof(int));
 
-	for (int i = 2; i < 10; i++) {
-		v.value = i;
-		Node *newNode = my_linked_list_add(startNode, v);
+	for (int i = 2; i < 100; i++) {
+		value = i * 1000;
+		my_linked_list_add(startNode, &value, sizeof(int));
 	}
 
-	my_linked_list_printValues(startNode);
+	my_linked_list_print_int_values(startNode);
 
 	my_linked_list_destroy(startNode);
 
