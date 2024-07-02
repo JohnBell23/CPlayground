@@ -20,20 +20,11 @@ Node* my_linked_list_add(Node *nodes, void *value, size_t size) {
 	return newNode;
 }
 
-void my_linked_list_print_int_values(Node *nodes) {
+void my_linked_list_print_values(Node *nodes, PrintFunc printFunc) {
 	int i = 1;
 	Node *current = nodes;
 	while (current != NULL) {
-		printf("Node %4d value %6d\n", i++, *((int*) current->value));
-		current = current->next;
-	}
-}
-
-void my_linked_list_print_values(Node *nodes) {
-	int i = 1;
-	Node *current = nodes;
-	while (current != NULL) {
-		printf("Node %4d value %6d\n", i++, *((int*) current->value));
+		printFunc(i++, current->value);
 		current = current->next;
 	}
 }

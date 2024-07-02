@@ -10,13 +10,13 @@ typedef struct NodeType {
 
 } Node;
 
+typedef void (*PrintFunc)(int, void*);
+
 Node* my_linked_list_init(void *value, size_t size);
 
 Node* my_linked_list_add(Node *nodes, void *value, size_t size);
 
-void my_linked_list_print_int_values(Node *nodes);
-
-void my_linked_list_print_values(Node *nodes);
+void my_linked_list_print_values(Node *nodes, PrintFunc printFunc);
 
 void my_linked_list_destroy(Node *nodes);
 
