@@ -3,7 +3,7 @@
 
 typedef void (*EventNotification)(void *instance, int number);
 
-typedef struct {
+typedef struct EventObserver {
 	void *instance;
 	EventNotification notification;
 } EventObserver;
