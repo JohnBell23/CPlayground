@@ -1,3 +1,12 @@
+/*
+ * event_producer.h
+ *
+ * Produces events consumed by observers
+ *
+ *  Created on: 12.07.2024
+ *      Author: John Bell
+ */
+
 #ifndef INC_EVENT_PRODUCER_H_
 #define INC_EVENT_PRODUCER_H_
 

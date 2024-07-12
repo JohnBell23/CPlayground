@@ -1,3 +1,12 @@
+/*
+ * main.h
+ *
+ * Program entry
+ *
+ *  Created on: 12.07.2024
+ *      Author: John Bell
+ */
+
 #ifndef INC_MAIN_H_
 #define INC_MAIN_H_
 
