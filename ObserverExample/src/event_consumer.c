@@ -3,7 +3,7 @@
 
 void event_consumer_setnumber(void *instance, int number) {
 	EventConsumer *inst = instance;
-	inst->value = number * 2;
+	inst->value = number;
 
 	printf("event consumer got %d\n", inst->value);
 }

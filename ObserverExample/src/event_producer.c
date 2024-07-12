@@ -19,14 +19,31 @@ void event_producer_attach(EventObserver *eventObserver) {
 		while (next->next != NULL) {
 			next = next->next;
 		}
-		next = newNode;
+		next->next = newNode;
 	}
 
 }
 
 void event_producer_detach(EventObserver *eventObserver) {
-	eventObservers = NULL;
-	// TODO: deallocate
+	ObserverNode *current = eventObservers;
+	ObserverNode *previous = NULL;
+
+	while (current != NULL && current->item != eventObserver) {
+		previous = current;
+		current = current->next;
+	}
+
+	if (current == NULL) {
+		return;
+	}
+
+	if (previous == NULL) {
+		eventObservers = current->next;
+	} else {
+		previous->next = current->next;
+	}
+
+	free(current);
 }
 
 void event_producer_generate_event() {

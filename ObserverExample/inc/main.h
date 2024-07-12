@@ -5,5 +5,6 @@
 #include "event_consumer.h"
 #include "event_consumer_second.h"
 #include "event_producer.h"
+#include "event_consumer_third.h"
 
 #endif /* INC_MAIN_H_ */
